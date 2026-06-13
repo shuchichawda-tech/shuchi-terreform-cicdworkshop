@@ -38,19 +38,29 @@ jobs:
 
       - name: Terraform fmt check
         run: terraform fmt -check -recursive
-        working-directory: ./Terraformfiles
+        working-directory: ./terraformfiles
 
 
       - name: Terraform init
         run: terraform init
-        working-directory: ./Terraformfiles
+        working-directory: ./terraformfiles
+        env: 
+           ARM_CLIENT_ID:       ${{ secrets.ARM_CLIENT_ID }}
+           ARM_CLIENT_SECRET:   ${{ secrets.ARM_CLIENT_SECRET }}
+           ARM_TENANT_ID:       ${{ secrets.ARM_TENANT_ID }}
+           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
 
       - name: Terraform validate
         run: terraform validate
-        working-directory: ./Terraformfiles
+        working-directory: ./terraformfiles
 
 
       - name: Terraform plan
         run: terraform plan
-        working-directory: ./Terraformfiles
+        working-directory: ./terraformfiles
+        env: 
+           ARM_CLIENT_ID:       ${{ secrets.ARM_CLIENT_ID }}
+           ARM_CLIENT_SECRET:   ${{ secrets.ARM_CLIENT_SECRET }}
+           ARM_TENANT_ID:       ${{ secrets.ARM_TENANT_ID }}
+           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
